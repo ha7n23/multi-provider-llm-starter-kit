@@ -6,7 +6,7 @@ This project is part of an AI Engineer portfolio track. It demonstrates how to m
 
 ## Current Status
 
-Phase 2A complete:
+Phase 2B complete:
 
 - Project foundation built
 - Mock provider implemented
@@ -21,6 +21,8 @@ Phase 2A complete:
 - `/complaints/analyse` endpoint added
 - API request/response schemas added
 - API tests passing
+- `/generate/stream` endpoint added
+- Streaming API tests passing
 
 ## Purpose
 

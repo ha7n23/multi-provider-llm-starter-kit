@@ -86,3 +86,42 @@ def test_complaint_analysis_endpoint_rejects_empty_complaint() -> None:
     )
 
     assert response.status_code == 422
+
+def test_stream_generate_endpoint_with_mock_provider() -> None:
+    with client.stream(
+        "POST",
+        "/generate/stream",
+        json={
+            "provider": "mock",
+            "prompt": "Explain streaming.",
+        },
+    ) as response:
+        assert response.status_code == 200
+        streamed_text = "".join(response.iter_text())
+
+    assert "mock LLM response" in streamed_text
+
+
+def test_stream_generate_endpoint_rejects_unsupported_provider() -> None:
+    response = client.post(
+        "/generate/stream",
+        json={
+            "provider": "openai",
+            "prompt": "Hello",
+        },
+    )
+
+    assert response.status_code == 400
+    assert "Unsupported provider" in response.json()["detail"]
+
+
+def test_stream_generate_endpoint_rejects_empty_prompt() -> None:
+    response = client.post(
+        "/generate/stream",
+        json={
+            "provider": "mock",
+            "prompt": "",
+        },
+    )
+
+    assert response.status_code == 422

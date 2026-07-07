@@ -1,4 +1,7 @@
+from collections.abc import Iterator
+
 from fastapi import APIRouter, HTTPException, status
+from fastapi.responses import StreamingResponse
 
 from multi_provider_llm.api.schemas import (
     ComplaintAnalysisRequest,
@@ -14,6 +17,16 @@ from multi_provider_llm.services.complaint_service import ComplaintAnalysisServi
 
 
 router = APIRouter()
+
+
+@router.get("/")
+def root() -> dict[str, str]:
+    """Return a simple root message."""
+    return {
+        "message": "Multi-Provider LLM Starter Kit API",
+        "docs": "/docs",
+        "health": "/health",
+    }
 
 
 @router.get("/health", response_model=HealthResponse)
@@ -43,6 +56,32 @@ def generate_text(request: GenerateRequest) -> GenerateResponse:
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(error),
         ) from error
+
+
+@router.post("/generate/stream")
+def stream_generate_text(request: GenerateRequest) -> StreamingResponse:
+    """Stream generated text using the selected LLM provider."""
+    try:
+        client = get_llm_client(request.provider)
+
+    except LLMStarterKitError as error:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(error),
+        ) from error
+
+    def token_stream() -> Iterator[str]:
+        try:
+            for chunk in client.generate_stream(request.prompt):
+                yield chunk
+
+        except LLMStarterKitError as error:
+            yield f"\n[ERROR] {error}"
+
+    return StreamingResponse(
+        token_stream(),
+        media_type="text/plain",
+    )
 
 
 @router.post("/complaints/analyse", response_model=ComplaintAnalysisResponse)
