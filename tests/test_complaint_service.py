@@ -36,3 +36,36 @@ def test_build_prompt_rejects_empty_complaint() -> None:
 
     with pytest.raises(StructuredOutputError):
         service.build_prompt("")
+
+
+def test_parse_analysis_response_accepts_json_inside_markdown_fence() -> None:
+    service = ComplaintAnalysisService(llm_client=MockLLMClient())
+
+    response = """
+    ```json
+    {
+      "summary": "Customer reports a deducted QR payment.",
+      "category": "payment_dispute",
+      "urgency": "high",
+      "needs_human_review": true,
+      "recommended_action": "Check transaction records."
+    }
+    ```
+    """
+
+    result = service.parse_analysis_response(response)
+
+    assert isinstance(result, ComplaintAnalysis)
+    assert result.category == "payment_dispute"
+
+
+def test_parse_analysis_response_rejects_invalid_json() -> None:
+    service = ComplaintAnalysisService(llm_client=MockLLMClient())
+
+    response = """
+    {
+      "summary": "This JSON is incomplete
+    """
+
+    with pytest.raises(StructuredOutputError):
+        service.parse_analysis_response(response)

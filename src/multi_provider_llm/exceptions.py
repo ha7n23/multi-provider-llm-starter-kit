@@ -1,13 +1,17 @@
 class LLMStarterKitError(Exception):
-    """Base class for exceptions in the LLM Starter Kit."""
-    
+    """Base exception for the LLM starter kit."""
+
 
 class LLMProviderError(LLMStarterKitError):
-    """Exception raised for errors related to LLM providers."""
+    """Raised when an LLM provider fails."""
+
+
+class MissingAPIKeyError(LLMStarterKitError):
+    """Raised when a required API key is missing."""
 
 
 class UnsupportedProviderError(LLMStarterKitError):
-    """Exception raised when an unsupported LLM provider is specified."""
+    """Raised when a selected provider is not supported."""
 
 
 class StructuredOutputError(LLMStarterKitError):
