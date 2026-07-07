@@ -6,16 +6,21 @@ This project is part of an AI Engineer portfolio track. It demonstrates how to m
 
 ## Current Status
 
-Phase 1B complete:
+Phase 2A complete:
 
-* Project foundation built
-* Mock provider implemented
-* Gemini, Groq, and Mistral clients added
-* Provider factory added
-* Streaming supported
-* Structured complaint analysis working
-* Robust JSON cleaning and parsing added
-* Unit tests passing
+- Project foundation built
+- Mock provider implemented
+- Gemini, Groq, and Mistral clients added
+- Provider factory added
+- Streaming supported at client/CLI level
+- Structured complaint analysis working
+- Robust JSON cleaning and parsing added
+- FastAPI backend foundation added
+- `/health` endpoint added
+- `/generate` endpoint added
+- `/complaints/analyse` endpoint added
+- API request/response schemas added
+- API tests passing
 
 ## Purpose
 
@@ -63,6 +68,13 @@ The mock provider is used to test application logic without making live API call
 * Local CLI demo runner
 * Unit tests with pytest
 * Pyright/Pylance configuration for `src/` layout
+
+- FastAPI backend
+- `/health` endpoint
+- `/generate` endpoint
+- `/complaints/analyse` endpoint
+- API request/response schemas
+- API endpoint tests
 
 ## Repository Structure
 
