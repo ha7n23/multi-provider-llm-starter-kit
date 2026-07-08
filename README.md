@@ -6,7 +6,7 @@ This project is part of an AI Engineer portfolio track. It demonstrates how to m
 
 ## Current Status
 
-Phase 2B complete:
+Phase 3A complete:
 
 - Project foundation built
 - Mock provider implemented
@@ -23,6 +23,10 @@ Phase 2B complete:
 - API tests passing
 - `/generate/stream` endpoint added
 - Streaming API tests passing
+
+- Dockerfile added
+- Docker image builds successfully
+- API runs inside a Docker container
 
 ## Purpose
 
@@ -77,6 +81,9 @@ The mock provider is used to test application logic without making live API call
 - `/complaints/analyse` endpoint
 - API request/response schemas
 - API endpoint tests
+
+- Docker support
+- `.dockerignore` for clean and safe builds
 
 ## Repository Structure
 
@@ -437,3 +444,34 @@ This project is designed to be a professional AI Engineer portfolio project.
 It shows the ability to build an LLM application foundation with clean architecture, multiple providers, structured outputs, streaming, tests, and realistic business use cases.
 
 The project is intentionally designed to grow into a backend service and later support larger AI systems such as RAG assistants, workflow automation tools, and enterprise copilots.
+
+
+## Docker
+
+This project can run inside Docker for consistent local execution and future deployment.
+
+Build the image:
+
+```bash
+docker build -t multi-provider-llm-starter-kit .
+```
+
+Run with the mock provider:
+
+```bash
+docker run --rm -p 8000:8000 multi-provider-llm-starter-kit
+```
+
+Open the API docs:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+Run with real provider API keys from a local `.env` file:
+
+```bash
+docker run --rm --env-file .env -p 8000:8000 multi-provider-llm-starter-kit
+```
+
+The `.env` file is passed at runtime and is not copied into the Docker image.
