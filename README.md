@@ -4,9 +4,14 @@ A production-style Python starter kit for building LLM applications with multipl
 
 This project is part of an AI Engineer portfolio track. It demonstrates how to move beyond simple chatbot scripts and build maintainable LLM application foundations that can later support APIs, RAG systems, workflow automation, and cloud deployment.
 
+## Project Documentation
+
+- [API Examples](docs/API_EXAMPLES.md)
+- [Architecture](docs/ARCHITECTURE.md)
+
 ## Current Status
 
-Phase 3B complete:
+Phase 4A complete:
 
 - Project foundation built
 - Mock provider implemented
@@ -92,6 +97,10 @@ The mock provider is used to test application logic without making live API call
 - GitHub Actions CI workflow
 - Automated test execution on push and pull request
 - FastAPI backend with interactive Swagger docs
+
+- Dedicated architecture documentation
+- Dedicated API examples documentation
+- Mermaid diagrams for system and request flow explanation
 
 ## Repository Structure
 
