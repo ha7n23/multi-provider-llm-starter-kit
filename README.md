@@ -6,7 +6,7 @@ This project is part of an AI Engineer portfolio track. It demonstrates how to m
 
 ## Current Status
 
-Phase 3A complete:
+Phase 3B complete:
 
 - Project foundation built
 - Mock provider implemented
@@ -27,6 +27,10 @@ Phase 3A complete:
 - Dockerfile added
 - Docker image builds successfully
 - API runs inside a Docker container
+
+- GitHub Actions CI added
+- Test workflow runs automatically on push and pull requests
+- Unit and API tests passing
 
 ## Purpose
 
@@ -84,6 +88,10 @@ The mock provider is used to test application logic without making live API call
 
 - Docker support
 - `.dockerignore` for clean and safe builds
+
+- GitHub Actions CI workflow
+- Automated test execution on push and pull request
+- FastAPI backend with interactive Swagger docs
 
 ## Repository Structure
 
@@ -475,3 +483,15 @@ docker run --rm --env-file .env -p 8000:8000 multi-provider-llm-starter-kit
 ```
 
 The `.env` file is passed at runtime and is not copied into the Docker image.
+
+
+## Continuous Integration
+
+This project uses GitHub Actions to automatically run the test suite whenever code is pushed to the `main` branch or a pull request is opened.
+
+Workflow file:
+
+```text
+.github/workflows/tests.yml
+
+![Run Tests](https://github.com/ha7n23/multi-provider-llm-starter-kit/actions/workflows/tests.yml/badge.svg)
